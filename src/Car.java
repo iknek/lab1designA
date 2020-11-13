@@ -26,10 +26,16 @@ public abstract class Car implements Movable{
         this.modelName = modelName;
     }
 
+    /**
+     * Sets current speed to 0.1
+     */
     public void startEngine() {
         currentSpeed = 0.1;
     }
 
+    /**
+     * Sets currentSpeed to 0.0
+     */
     public void stopEngine() {
         currentSpeed = 0.0;
     }
