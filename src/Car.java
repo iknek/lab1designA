@@ -25,9 +25,7 @@ public abstract class Car implements Movable{
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
-        //ArrayList<String> = new ArrayList<>();
     }
-
 
     /**
      * Sets current speed to 0.1
@@ -45,6 +43,7 @@ public abstract class Car implements Movable{
 
     /**
      * Getter - returns current speed
+     * Meant to be private but results in test errors....
      * @return currentSpeed
      */
     public double getCurrentSpeed() {
@@ -54,7 +53,7 @@ public abstract class Car implements Movable{
     /** Setter - sets value to current speed
      * @param amount = gas(amount)
      * */
-    public void setCurrentSpeed(double amount){
+    private void setCurrentSpeed(double amount){
         currentSpeed = amount;
     }
 
