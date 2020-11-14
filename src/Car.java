@@ -55,9 +55,7 @@ public abstract class Car implements Movable{
      * @param amount = gas(amount)
      * */
     public void setCurrentSpeed(double amount){
-        if(currentSpeed + amount >= 0 && currentSpeed+amount <= enginePower){
-            this.currentSpeed += amount;
-        }
+        currentSpeed = amount;
     }
 
     /**
