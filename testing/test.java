@@ -116,5 +116,12 @@ public class test {
         saab.stopEngine();
         assertTrue(saab.getCurrentSpeed() == 0.0);
     }
+
+    @Test
+    public void checkCurrentSpeedInterval(){
+        volvo.startEngine();
+        volvo.gas(1);
+        assertTrue();
+    }
 }
 

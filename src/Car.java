@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Car implements Movable{
     /**
@@ -24,7 +25,9 @@ public abstract class Car implements Movable{
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
+        //ArrayList<String> = new ArrayList<>();
     }
+
 
     /**
      * Sets current speed to 0.1
@@ -51,10 +54,14 @@ public abstract class Car implements Movable{
     /** Setter - sets value to current speed
      * @param amount = gas(amount)
      * */
-    public void setCurrentSpeed(double amount){this.currentSpeed = amount;}
+    public void setCurrentSpeed(double amount){
+        if(currentSpeed + amount >= 0 && currentSpeed+amount <= enginePower){
+            this.currentSpeed += amount;
+        }
+    }
 
     /**
-     * Abstract method - overridden in classes that implement car objects
+     * speedFactor in
      * @return speedFactor
      */
     public abstract double speedFactor();
@@ -62,22 +69,22 @@ public abstract class Car implements Movable{
     /** Increments the speed of the car depending on speedFactor and amount
      * @param amount = Gas(amount)
      * */
-    public void incrementSpeed(double amount) {
-        setCurrentSpeed(getCurrentSpeed() + speedFactor() *amount);
+    private void incrementSpeed(double amount) {
+        setCurrentSpeed(Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower()));
     }
 
     /** Decrements the speed of the car depending on speedFactor and amount
      * @param amount = Gas(amount)
      */
-    public void decrementSpeed(double amount) {
-        setCurrentSpeed(getCurrentSpeed() - speedFactor() * amount); /** Decrements speed method */
+    private void decrementSpeed(double amount) {
+        setCurrentSpeed(Math.max(getCurrentSpeed() - speedFactor() * amount, 0));
     }
 
     /** Returns incrementSpeed with the amount specified, if it's between 0 and 1
      * @param amount = Gas(amount)
      * */
     public void gas(double amount) {
-        if(amount <= 1 && amount > 0){
+        if(amount <= 1 && amount >= 0){
             this.incrementSpeed(amount);
         }
     }
@@ -86,12 +93,14 @@ public abstract class Car implements Movable{
      * @param amount = brake(amount)
      * */
     public void brake(double amount) {
-        if(amount <= 1 && amount > 0){
+        if(amount <= 1 && amount >= 0){
             this.decrementSpeed(amount);
         }
     }
 
-    /** Returns x and y direction of the car object */
+    /**
+     * Changes x and y coordinate of the car object dependant on direction and currentSpeed
+     */
     @Override
     public void move(){
         this.x += Math.cos(direction) * currentSpeed;
